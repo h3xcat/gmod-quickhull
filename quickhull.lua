@@ -456,8 +456,10 @@ do
     end
 end
 --------------------------------------------------------------------------------
-function quickhull.BuildMeshFromPoints( points, convex_mesh )
+function quickhull.BuildMeshFromPoints( points, convex_mesh, color )
     if #points < 3 then error("Must have at least 3 points to build convex hull mesh.") end
+    local color = color or COLOR_WHITE
+
     local offset = -points[1]
 
     local points_v2 = wrap_points(points, offset)
@@ -470,7 +472,7 @@ function quickhull.BuildMeshFromPoints( points, convex_mesh )
         local vertices = {}
         local offset_v2 = Vector2(offset)
         for k, face in pairs(faces) do
-            for k, v in pairs( {face_to_mesh_vertex(face, COLOR_WHITE, offset_v2 )} ) do
+            for k, v in pairs( {face_to_mesh_vertex(face, color, offset_v2 )} ) do
                 vertices[#vertices + 1] = v
             end
         end
